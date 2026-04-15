@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>712-714 Arcadia St, Warsaw MO | Duplex For Sale By Owner</title>
+    <meta name="description" content="Turnkey duplex for sale in Warsaw, MO. 2 units, fully updated, walk to harbor & downtown. $329,900. For Sale By Owner.">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; color: #222; background: #fff; }
+
+        /* HERO */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 70vh;
+            min-height: 400px;
+            overflow: hidden;
+        }
+        .hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .hero-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.75));
+            padding: 40px 30px 30px;
+        }
+        .hero-overlay .tag {
+            display: inline-block;
+            background: #bf1414;
+            color: #fff;
+            padding: 5px 14px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            border-radius: 3px;
+            margin-bottom: 12px;
+        }
+        .hero-overlay h1 {
+            color: #fff;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+        .hero-overlay .subtitle {
+            color: #ddd;
+            font-size: 16px;
+        }
+        .hero-overlay .price {
+            color: #fff;
+            font-size: 36px;
+            font-weight: 800;
+            margin-top: 8px;
+        }
+
+        /* QUICK STATS */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 20px;
+            background: #1f2e4d;
+            color: #fff;
+            flex-wrap: wrap;
+        }
+        .stat {
+            text-align: center;
+        }
+        .stat .num { font-size: 22px; font-weight: 700; }
+        .stat .label { font-size: 12px; color: #aab; letter-spacing: 0.5px; }
+
+        /* SECTIONS */
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+        .section {
+            padding: 40px 0;
+        }
+        .section:nth-child(even) {
+            background: #f7f7f7;
+        }
+        .section h2 {
+            font-size: 24px;
+            color: #1f2e4d;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #bf1414;
+            display: inline-block;
+        }
+
+        /* FEATURES GRID */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        .feature-card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 22px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .feature-card h3 {
+            font-size: 16px;
+            color: #1f2e4d;
+            margin-bottom: 10px;
+        }
+        .feature-card h3 .icon { margin-right: 8px; }
+        .feature-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        .feature-card ul li {
+            padding: 4px 0;
+            font-size: 14px;
+            color: #444;
+            line-height: 1.5;
+        }
+        .feature-card ul li::before {
+            content: "\2022";
+            color: #bf1414;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+        .feature-card p {
+            font-size: 14px;
+            color: #444;
+            line-height: 1.6;
+        }
+
+        /* PHOTO GALLERY */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 8px;
+        }
+        .gallery-grid img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .gallery-grid img:hover {
+            transform: scale(1.02);
+        }
+        .gallery-grid .caption {
+            font-size: 12px;
+            color: #666;
+            text-align: center;
+            padding: 4px 0;
+        }
+
+        /* LIGHTBOX */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.92);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .lightbox.active { display: flex; }
+        .lightbox img {
+            max-width: 90vw;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+        .lightbox .caption {
+            color: #ccc;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        .lightbox .close {
+            position: absolute;
+            top: 20px; right: 30px;
+            color: #fff;
+            font-size: 36px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        .lightbox .nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #fff;
+            font-size: 48px;
+            cursor: pointer;
+            padding: 20px;
+            user-select: none;
+        }
+        .lightbox .nav.prev { left: 10px; }
+        .lightbox .nav.next { right: 10px; }
+
+        /* CONTACT */
+        .contact-bar {
+            background: #1f2e4d;
+            color: #fff;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        .contact-bar h2 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            border: none;
+            color: #fff;
+        }
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .contact-info .name {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        .contact-info .fsbo {
+            font-size: 13px;
+            color: #aab;
+        }
+        .contact-info a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+        }
+        .contact-info a:hover { text-decoration: underline; }
+
+        .cta-btn {
+            display: inline-block;
+            background: #bf1414;
+            color: #fff;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 15px;
+            transition: background 0.2s;
+        }
+        .cta-btn:hover { background: #a01010; }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            font-size: 12px;
+            color: #999;
+            background: #111;
+        }
+
+        @media (max-width: 600px) {
+            .hero-overlay h1 { font-size: 22px; }
+            .hero-overlay .price { font-size: 28px; }
+            .stats { gap: 15px; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .gallery-grid img { height: 150px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+    <img src="images/hero.jpg" alt="712-714 Arcadia St, Warsaw MO - Duplex Exterior">
+    <div class="hero-overlay">
+        <span class="tag">FOR SALE BY OWNER</span>
+        <h1>712-714 Arcadia St</h1>
+        <div class="subtitle">Warsaw, MO 65355</div>
+        <div class="price">$329,900</div>
+    </div>
+</div>
+
+<!-- QUICK STATS -->
+<div class="stats">
+    <div class="stat"><div class="num">2</div><div class="label">UNITS</div></div>
+    <div class="stat"><div class="num">4</div><div class="label">BEDROOMS</div></div>
+    <div class="stat"><div class="num">2.5</div><div class="label">BATHROOMS</div></div>
+    <div class="stat"><div class="num">&#10003;</div><div class="label">BASEMENT</div></div>
+    <div class="stat"><div class="num">&#10003;</div><div class="label">MOVE-IN READY</div></div>
+    <div class="stat"><div class="num">&#10003;</div><div class="label">NEW HEAT PUMPS</div></div>
+</div>
+
+<!-- ABOUT -->
+<div class="section">
+    <div class="container">
+        <h2>About the Property</h2>
+        <div class="features">
+            <div class="feature-card">
+                <h3><span class="icon">&#9875;</span> Fish Here Often? Own Here.</h3>
+                <p>Turnkey Duplex &ndash; Walk to Harbor &amp; Downtown in Warsaw, MO. Stop paying for lodging every tournament&mdash;own a place just minutes from the action in Warsaw.</p>
+            </div>
+            <div class="feature-card">
+                <h3><span class="icon">&#8962;</span> Property Highlights</h3>
+                <ul>
+                    <li>Duplex: 2 bed / 1.5 bath + basement &amp; 2 bed / 1 bath</li>
+                    <li>Fully updated &ndash; no projects, move-in ready</li>
+                    <li>Brand new heat pumps (both units)</li>
+                    <li>New garage doors, flooring, paint, fixtures</li>
+                    <li>Large front deck for relaxing after a day on the water</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <h3><span class="icon">&#9654;</span> Room for Everything</h3>
+                <ul>
+                    <li>Ample parking for boats, trailers, ATVs, and multiple vehicles</li>
+                    <li>Easy in/out access&mdash;ideal for early tournament mornings</li>
+                    <li>No tight spaces or off-site storage needed</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <h3><span class="icon">&#8982;</span> Location, Location</h3>
+                <ul>
+                    <li>Walk to the harbor &amp; tournament areas</li>
+                    <li>Walk to downtown &ndash; food, drinks, shopping</li>
+                    <li>One of the most convenient spots in town</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <h3><span class="icon">&#9733;</span> Why This Property?</h3>
+                <ul>
+                    <li>Stay in one unit, rent the other</li>
+                    <li>Or rent both for strong income potential</li>
+                    <li>Ideal for anglers, investors, or second-home buyers</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <h3><span class="icon">&#9889;</span> Think About It&hellip;</h3>
+                <p>You come here every season&mdash;why not own, build equity, and generate income at the same time?</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- PHOTO GALLERY -->
+<div class="section" id="photos">
+    <div class="container">
+        <h2>Photo Gallery</h2>
+        <div class="gallery-grid">
+            <div><img src="images/hero.jpg" alt="Exterior Front" onclick="openLightbox(0)"><div class="caption">Exterior Front</div></div>
+            <div><img src="images/ext1.jpg" alt="Exterior Side" onclick="openLightbox(1)"><div class="caption">Exterior Side</div></div>
+            <div><img src="images/ext2.jpg" alt="Exterior Angle" onclick="openLightbox(2)"><div class="caption">Exterior Angle</div></div>
+            <div><img src="images/ext3.jpg" alt="Exterior View" onclick="openLightbox(3)"><div class="caption">Exterior View</div></div>
+            <div><img src="images/ext4.jpg" alt="Exterior Wide" onclick="openLightbox(4)"><div class="caption">Exterior Wide</div></div>
+            <div><img src="images/lr1.jpg" alt="Living Room - Unit 1" onclick="openLightbox(5)"><div class="caption">Living Room - Unit 1</div></div>
+            <div><img src="images/lr2.jpg" alt="Living Room - Unit 1" onclick="openLightbox(6)"><div class="caption">Living Room - Unit 1</div></div>
+            <div><img src="images/lr3.jpg" alt="Living Room - Unit 2" onclick="openLightbox(7)"><div class="caption">Living Room - Unit 2</div></div>
+            <div><img src="images/lr4.jpg" alt="Living Room - Unit 2" onclick="openLightbox(8)"><div class="caption">Living Room - Unit 2</div></div>
+            <div><img src="images/k1.jpg" alt="Kitchen - Unit 1" onclick="openLightbox(9)"><div class="caption">Kitchen - Unit 1</div></div>
+            <div><img src="images/k2.jpg" alt="Kitchen - Unit 1" onclick="openLightbox(10)"><div class="caption">Kitchen - Unit 1</div></div>
+            <div><img src="images/k3.jpg" alt="Kitchen - Unit 1" onclick="openLightbox(11)"><div class="caption">Kitchen - Unit 1</div></div>
+            <div><img src="images/k4.jpg" alt="Kitchen - Unit 2" onclick="openLightbox(12)"><div class="caption">Kitchen - Unit 2</div></div>
+            <div><img src="images/br1.jpg" alt="Primary Bedroom" onclick="openLightbox(13)"><div class="caption">Primary Bedroom</div></div>
+            <div><img src="images/br2.jpg" alt="Primary Bedroom" onclick="openLightbox(14)"><div class="caption">Primary Bedroom</div></div>
+            <div><img src="images/br3.jpg" alt="Primary Bedroom" onclick="openLightbox(15)"><div class="caption">Primary Bedroom</div></div>
+            <div><img src="images/br4.jpg" alt="Secondary Bedroom" onclick="openLightbox(16)"><div class="caption">Secondary Bedroom</div></div>
+            <div><img src="images/br5.jpg" alt="Secondary Bedroom - Unit 2" onclick="openLightbox(17)"><div class="caption">Secondary Bedroom - Unit 2</div></div>
+            <div><img src="images/br6.jpg" alt="Secondary Bedroom - Unit 2" onclick="openLightbox(18)"><div class="caption">Secondary Bedroom - Unit 2</div></div>
+            <div><img src="images/bath1.jpg" alt="Half Bath" onclick="openLightbox(19)"><div class="caption">Half Bath</div></div>
+            <div><img src="images/bath2.jpg" alt="Full Bath" onclick="openLightbox(20)"><div class="caption">Full Bath</div></div>
+            <div><img src="images/bath3.jpg" alt="Primary Bath" onclick="openLightbox(21)"><div class="caption">Primary Bath</div></div>
+            <div><img src="images/hwl.jpg" alt="Hallway/Laundry" onclick="openLightbox(22)"><div class="caption">Hallway / Laundry</div></div>
+            <div><img src="images/base1.jpg" alt="Basement" onclick="openLightbox(23)"><div class="caption">Basement</div></div>
+            <div><img src="images/base2.jpg" alt="Basement" onclick="openLightbox(24)"><div class="caption">Basement</div></div>
+        </div>
+    </div>
+</div>
+
+<!-- CONTACT -->
+<div class="contact-bar" id="contact">
+    <h2>Interested? Get in Touch</h2>
+    <div class="contact-info">
+        <div>
+            <div class="name">Kim Weaver</div>
+            <div class="fsbo">For Sale By Owner</div>
+        </div>
+        <div>
+            <a href="tel:+19135685239">&#9742; (913) 568-5239</a>
+        </div>
+        <div>
+            <a href="mailto:kimweaver@hotmail.com">&#9993; kimweaver@hotmail.com</a>
+        </div>
+    </div>
+    <a href="tel:+19135685239" class="cta-btn">Call Now</a>
+</div>
+
+<footer>
+    712-714 Arcadia St, Warsaw, MO 65355 &bull; For Sale By Owner &bull; $329,900
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+    <span class="close" onclick="closeLightbox()">&times;</span>
+    <span class="nav prev" onclick="navLightbox(-1)">&#10094;</span>
+    <img id="lb-img" src="" alt="">
+    <div class="caption" id="lb-caption"></div>
+    <span class="nav next" onclick="navLightbox(1)">&#10095;</span>
+</div>
+
+<script>
+const photos = [
+    {src:"images/hero.jpg",cap:"Exterior Front"},
+    {src:"images/ext1.jpg",cap:"Exterior Side"},
+    {src:"images/ext2.jpg",cap:"Exterior Angle"},
+    {src:"images/ext3.jpg",cap:"Exterior View"},
+    {src:"images/ext4.jpg",cap:"Exterior Wide"},
+    {src:"images/lr1.jpg",cap:"Living Room - Unit 1"},
+    {src:"images/lr2.jpg",cap:"Living Room - Unit 1"},
+    {src:"images/lr3.jpg",cap:"Living Room - Unit 2"},
+    {src:"images/lr4.jpg",cap:"Living Room - Unit 2"},
+    {src:"images/k1.jpg",cap:"Kitchen - Unit 1"},
+    {src:"images/k2.jpg",cap:"Kitchen - Unit 1"},
+    {src:"images/k3.jpg",cap:"Kitchen - Unit 1"},
+    {src:"images/k4.jpg",cap:"Kitchen - Unit 2"},
+    {src:"images/br1.jpg",cap:"Primary Bedroom"},
+    {src:"images/br2.jpg",cap:"Primary Bedroom"},
+    {src:"images/br3.jpg",cap:"Primary Bedroom"},
+    {src:"images/br4.jpg",cap:"Secondary Bedroom"},
+    {src:"images/br5.jpg",cap:"Secondary Bedroom - Unit 2"},
+    {src:"images/br6.jpg",cap:"Secondary Bedroom - Unit 2"},
+    {src:"images/bath1.jpg",cap:"Half Bath"},
+    {src:"images/bath2.jpg",cap:"Full Bath"},
+    {src:"images/bath3.jpg",cap:"Primary Bath"},
+    {src:"images/hwl.jpg",cap:"Hallway / Laundry"},
+    {src:"images/base1.jpg",cap:"Basement"},
+    {src:"images/base2.jpg",cap:"Basement"}
+];
+let currentIdx = 0;
+function openLightbox(i) {
+    currentIdx = i;
+    document.getElementById('lb-img').src = photos[i].src;
+    document.getElementById('lb-caption').textContent = photos[i].cap;
+    document.getElementById('lightbox').classList.add('active');
+}
+function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+}
+function navLightbox(dir) {
+    currentIdx = (currentIdx + dir + photos.length) % photos.length;
+    document.getElementById('lb-img').src = photos[currentIdx].src;
+    document.getElementById('lb-caption').textContent = photos[currentIdx].cap;
+}
+document.addEventListener('keydown', e => {
+    if (!document.getElementById('lightbox').classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') navLightbox(-1);
+    if (e.key === 'ArrowRight') navLightbox(1);
+});
+</script>
+
+</body>
+</html>
