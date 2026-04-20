@@ -258,12 +258,87 @@
             background: #111;
         }
 
+        /* BEFORE/AFTER SLIDER */
+        .staging-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+            gap: 20px;
+        }
+        .ba-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            aspect-ratio: 3/2;
+            cursor: ew-resize;
+            user-select: none;
+        }
+        .ba-container img {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .ba-container .ba-after {
+            clip-path: inset(0 50% 0 0);
+        }
+        .ba-container .ba-slider {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 4px;
+            height: 100%;
+            background: #fff;
+            z-index: 10;
+            pointer-events: none;
+        }
+        .ba-container .ba-handle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 44px;
+            height: 44px;
+            background: #fff;
+            border-radius: 50%;
+            z-index: 11;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #1f2e4d;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            pointer-events: none;
+        }
+        .ba-container .ba-label {
+            position: absolute;
+            bottom: 10px;
+            padding: 4px 12px;
+            background: rgba(0,0,0,0.6);
+            color: #fff;
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 3px;
+            z-index: 5;
+            pointer-events: none;
+        }
+        .ba-container .ba-label.left { left: 10px; }
+        .ba-container .ba-label.right { right: 10px; }
+        .ba-room-name {
+            text-align: center;
+            font-size: 14px;
+            color: #555;
+            margin-top: 8px;
+        }
+
         @media (max-width: 600px) {
             .hero-overlay h1 { font-size: 22px; }
             .hero-overlay .price { font-size: 28px; }
             .stats { gap: 15px; }
             .gallery-grid { grid-template-columns: repeat(2, 1fr); }
             .gallery-grid img { height: 150px; }
+            .staging-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -336,6 +411,60 @@
             <div class="feature-card">
                 <h3><span class="icon">&#9889;</span> Think About It&hellip;</h3>
                 <p>You come here every season&mdash;why not own, build equity, and generate income at the same time?</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- VIRTUAL STAGING -->
+<div class="section" id="staging">
+    <div class="container">
+        <h2>Virtual Staging</h2>
+        <p style="color:#555; margin-bottom:20px; font-size:14px;">Drag the slider to see rooms with and without furniture.</p>
+        <div class="staging-grid">
+            <div>
+                <div class="ba-container" data-before="images/lr1.jpg" data-after="images/lr1_staged.jpg">
+                    <img class="ba-before" src="images/lr1.jpg" alt="Living Room Unit 1 - Empty">
+                    <img class="ba-after" src="images/lr1_staged.jpg" alt="Living Room Unit 1 - Staged">
+                    <div class="ba-slider"></div>
+                    <div class="ba-handle">&#x2194;</div>
+                    <span class="ba-label left">Staged</span>
+                    <span class="ba-label right">Current</span>
+                </div>
+                <div class="ba-room-name">Living Room - Unit 1</div>
+            </div>
+            <div>
+                <div class="ba-container" data-before="images/lr3.jpg" data-after="images/lr3_staged.jpg">
+                    <img class="ba-before" src="images/lr3.jpg" alt="Living Room Unit 2 - Empty">
+                    <img class="ba-after" src="images/lr3_staged.jpg" alt="Living Room Unit 2 - Staged">
+                    <div class="ba-slider"></div>
+                    <div class="ba-handle">&#x2194;</div>
+                    <span class="ba-label left">Staged</span>
+                    <span class="ba-label right">Current</span>
+                </div>
+                <div class="ba-room-name">Living Room - Unit 2</div>
+            </div>
+            <div>
+                <div class="ba-container" data-before="images/br1.jpg" data-after="images/br1_staged.jpg">
+                    <img class="ba-before" src="images/br1.jpg" alt="Primary Bedroom - Empty">
+                    <img class="ba-after" src="images/br1_staged.jpg" alt="Primary Bedroom - Staged">
+                    <div class="ba-slider"></div>
+                    <div class="ba-handle">&#x2194;</div>
+                    <span class="ba-label left">Staged</span>
+                    <span class="ba-label right">Current</span>
+                </div>
+                <div class="ba-room-name">Primary Bedroom</div>
+            </div>
+            <div>
+                <div class="ba-container" data-before="images/br5.jpg" data-after="images/br5_staged.jpg">
+                    <img class="ba-before" src="images/br5.jpg" alt="Secondary Bedroom Unit 2 - Empty">
+                    <img class="ba-after" src="images/br5_staged.jpg" alt="Secondary Bedroom Unit 2 - Staged">
+                    <div class="ba-slider"></div>
+                    <div class="ba-handle">&#x2194;</div>
+                    <span class="ba-label left">Staged</span>
+                    <span class="ba-label right">Current</span>
+                </div>
+                <div class="ba-room-name">Secondary Bedroom - Unit 2</div>
             </div>
         </div>
     </div>
@@ -454,6 +583,30 @@ document.addEventListener('keydown', e => {
     if (e.key === 'Escape') closeLightbox();
     if (e.key === 'ArrowLeft') navLightbox(-1);
     if (e.key === 'ArrowRight') navLightbox(1);
+});
+
+// Before/After slider
+document.querySelectorAll('.ba-container').forEach(container => {
+    let isDragging = false;
+    const afterImg = container.querySelector('.ba-after');
+    const slider = container.querySelector('.ba-slider');
+    const handle = container.querySelector('.ba-handle');
+
+    function updateSlider(x) {
+        const rect = container.getBoundingClientRect();
+        let pct = ((x - rect.left) / rect.width) * 100;
+        pct = Math.max(0, Math.min(100, pct));
+        afterImg.style.clipPath = `inset(0 ${100 - pct}% 0 0)`;
+        slider.style.left = pct + '%';
+        handle.style.left = pct + '%';
+    }
+
+    container.addEventListener('mousedown', e => { isDragging = true; updateSlider(e.clientX); });
+    document.addEventListener('mousemove', e => { if (isDragging) updateSlider(e.clientX); });
+    document.addEventListener('mouseup', () => { isDragging = false; });
+    container.addEventListener('touchstart', e => { isDragging = true; updateSlider(e.touches[0].clientX); });
+    document.addEventListener('touchmove', e => { if (isDragging) updateSlider(e.touches[0].clientX); });
+    document.addEventListener('touchend', () => { isDragging = false; });
 });
 </script>
 
